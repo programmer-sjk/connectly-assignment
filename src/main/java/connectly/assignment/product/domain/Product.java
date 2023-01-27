@@ -64,14 +64,21 @@ public class Product extends BaseEntity {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> productImages = new ArrayList<>();
 
-    public Product() {
-        this.name = "name";
-        this.brand = "name";
-        this.originPrice = 10_000;
-        this.serial = "aaa";
-        this.productStatus = ProductStatus.NORMAL;
-        this.madeIn = "CN";
-        this.shippingBy = "CN";
+    protected Product() {}
+
+    public Product(Builder builder) {
+        this.name = builder.name;
+        this.brand = builder.brand;
+        this.originPrice = builder.originPrice;
+        this.serial = builder.serial;
+        this.productStatus = ProductStatus.find(builder.productStatus);
+        this.madeIn = builder.madeIn;
+        this.shippingBy = builder.shippingBy;
+        this.display = builder.display;
+        this.detail = builder.detail;
+//        this.productImages = builder.productImages
+//                .stream()
+//                .map(image -> new ProductImage(image.get));
     }
 
     public Long getId() {
@@ -136,5 +143,78 @@ public class Product extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static class Builder {
+        private String name;
+        private String brand;
+        private int originPrice;
+        private int discountRate;
+        private String serial;
+        private String productStatus;
+        private String madeIn;
+        private String shippingBy;
+        private boolean display;
+        private String detail;
+        private List<String> productImages;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder brand(String brand) {
+            this.brand = brand;
+            return this;
+        }
+
+        public Builder originPrice(int originPrice) {
+            this.originPrice = originPrice;
+            return this;
+        }
+
+        public Builder discountRate(int discountRate) {
+            this.discountRate = discountRate;
+            return this;
+        }
+
+        public Builder serial(String serial) {
+            this.serial = serial;
+            return this;
+        }
+
+        public Builder productStatus(String productStatus) {
+            this.productStatus = productStatus;
+            return this;
+        }
+
+        public Builder madeIn(String madeIn) {
+            this.madeIn = madeIn;
+            return this;
+        }
+
+        public Builder shippingBy(String shippingBy) {
+            this.shippingBy = shippingBy;
+            return this;
+        }
+
+        public Builder display(boolean display) {
+            this.display = display;
+            return this;
+        }
+
+        public Builder detail(String detail) {
+            this.detail = detail;
+            return this;
+        }
+
+        public Builder productImages(List<String> productImages) {
+            this.productImages = productImages;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
     }
 }
