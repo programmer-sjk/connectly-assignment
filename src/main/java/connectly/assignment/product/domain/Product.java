@@ -73,7 +73,7 @@ public class Product extends BaseEntity {
         this.brand = builder.brand;
         this.originPrice = builder.originPrice;
         this.serial = builder.serial;
-        this.productStatus = ProductStatus.find(builder.productStatus);
+        this.productStatus = ProductStatus.valueOf(builder.productStatus);
         this.madeIn = builder.madeIn;
         this.shippingBy = builder.shippingBy;
         this.display = builder.display;

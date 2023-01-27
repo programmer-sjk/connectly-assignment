@@ -23,7 +23,7 @@ public class ProductImage {
 
     public ProductImage(String path, String type, Product product) {
         this.path = path;
-        this.type = ProductImageType.find(type);
+        this.type = ProductImageType.valueOf(type);
         this.product = product;
     }
 
