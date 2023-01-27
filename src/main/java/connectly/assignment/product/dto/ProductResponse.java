@@ -37,4 +37,52 @@ public class ProductResponse {
                 .map(ProductImageResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public int getOriginPrice() {
+        return originPrice;
+    }
+
+    public int getDiscountRate() {
+        return discountRate;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public String getProductStatus() {
+        return productStatus;
+    }
+
+    public BigDecimal getStar() {
+        return star;
+    }
+
+    public String getMadeIn() {
+        return madeIn;
+    }
+
+    public String getShippingBy() {
+        return shippingBy;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public List<ProductImageResponse> getProductImages() {
+        return productImages;
+    }
 }

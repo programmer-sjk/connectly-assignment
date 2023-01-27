@@ -2,9 +2,11 @@ package connectly.assignment.product;
 
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.ProductRequest;
+import connectly.assignment.product.dto.ProductResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -14,12 +16,17 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product find(Long id) {
-        return this.findById(id);
+    public ProductResponse find(Long id) {
+        ProductResponse productResponse = new ProductResponse(this.findById(id));
+        System.out.println(productResponse.getId());
+        return productResponse;
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductResponse> findAll() {
+        return productRepository.findAll()
+                .stream()
+                .map(ProductResponse::new)
+                .collect(Collectors.toList());
     }
 
     public void insertProduct(ProductRequest request) {

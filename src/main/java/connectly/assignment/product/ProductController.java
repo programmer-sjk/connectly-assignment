@@ -2,6 +2,7 @@ package connectly.assignment.product;
 
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.ProductRequest;
+import connectly.assignment.product.dto.ProductResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +17,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable Long id) {
+    public ProductResponse getProduct(@PathVariable Long id) {
         return this.productService.find(id);
     }
 
     @GetMapping()
-    public List<Product> getAllProduct() {
+    public List<ProductResponse> getAllProduct() {
         return this.productService.findAll();
     }
 
