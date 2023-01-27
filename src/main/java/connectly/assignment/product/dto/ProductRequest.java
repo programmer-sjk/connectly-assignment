@@ -1,18 +1,28 @@
 package connectly.assignment.product.dto;
 
 import connectly.assignment.product.domain.Product;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRequest {
+    @NotBlank
     private String name;
+    @NotBlank
     private String brand;
+    @Min(0)
     private int originPrice;
+    @Min(0) @Max(100)
     private int discountRate;
+    @NotBlank
     private String serial;
+    @NotBlank
     private String productStatus;
+    @NotBlank
     private String madeIn;
+    @NotBlank
     private String shippingBy;
     private boolean display;
     private String detail;

@@ -2,6 +2,7 @@ package connectly.assignment.product;
 
 import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> insertProduct(@RequestBody ProductRequest request) {
+    public ResponseEntity<Void> insertProduct(@RequestBody @Valid ProductRequest request) {
         this.productService.insertProduct(request);
         return ResponseEntity.ok().build();
     }
