@@ -2,6 +2,7 @@ package connectly.assignment.product.dto;
 
 import connectly.assignment.product.domain.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRequest {
@@ -15,7 +16,7 @@ public class ProductRequest {
     private String shippingBy;
     private boolean display;
     private String detail;
-    private List<String> productImages;
+    private List<ProductImageRequest> productImages;
 
     public Product toEntity() {
         return new Product.Builder()
@@ -29,6 +30,7 @@ public class ProductRequest {
                 .shippingBy(shippingBy)
                 .display(display)
                 .detail(detail)
+                .productImages(productImages)
                 .build();
     }
 
@@ -72,7 +74,7 @@ public class ProductRequest {
         return detail;
     }
 
-    public List<String> getProductImages() {
+    public List<ProductImageRequest> getProductImages() {
         return productImages;
     }
 }
