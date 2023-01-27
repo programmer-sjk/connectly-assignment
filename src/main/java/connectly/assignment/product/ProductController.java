@@ -1,8 +1,8 @@
 package connectly.assignment.product;
 
-import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,18 +17,19 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse getProduct(@PathVariable Long id) {
-        return this.productService.find(id);
+    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(this.productService.find(id));
     }
 
     @GetMapping()
-    public List<ProductResponse> getAllProduct() {
-        return this.productService.findAll();
+    public ResponseEntity<List<ProductResponse>> getAllProduct() {
+        return ResponseEntity.ok(this.productService.findAll());
     }
 
     @PostMapping()
-    public void insertProduct(@RequestBody ProductRequest request) {
+    public ResponseEntity<Void> insertProduct(@RequestBody ProductRequest request) {
         this.productService.insertProduct(request);
+        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{id}")
@@ -37,7 +38,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         this.productService.deleteProduct(id);
+        return ResponseEntity.ok().build();
     }
 }
