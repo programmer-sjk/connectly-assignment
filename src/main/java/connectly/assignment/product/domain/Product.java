@@ -1,6 +1,7 @@
 package connectly.assignment.product.domain;
 
 import connectly.assignment.common.BaseEntity;
+import connectly.assignment.product.dto.ProductImageRequest;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Product extends BaseEntity {
@@ -76,9 +78,10 @@ public class Product extends BaseEntity {
         this.shippingBy = builder.shippingBy;
         this.display = builder.display;
         this.detail = builder.detail;
-//        this.productImages = builder.productImages
-//                .stream()
-//                .map(image -> new ProductImage(image.get));
+        this.productImages = builder.productImages
+                .stream()
+                .map(request -> new ProductImage(request.getPath(), request.getType(), this))
+                .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -156,7 +159,7 @@ public class Product extends BaseEntity {
         private String shippingBy;
         private boolean display;
         private String detail;
-        private List<String> productImages;
+        private List<ProductImageRequest> productImages = new ArrayList<>();
 
         public Builder name(String name) {
             this.name = name;
@@ -208,7 +211,7 @@ public class Product extends BaseEntity {
             return this;
         }
 
-        public Builder productImages(List<String> productImages) {
+        public Builder productImages(List<ProductImageRequest> productImages) {
             this.productImages = productImages;
             return this;
         }
