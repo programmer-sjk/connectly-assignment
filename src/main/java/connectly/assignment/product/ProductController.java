@@ -23,19 +23,18 @@ public class ProductController {
         return this.productService.findAll();
     }
 
-    @PostMapping("/${name}")
-    public String insertProduct(@PathVariable String name) {
+    @PostMapping()
+    public void insertProduct(@RequestParam String name) {
         this.productService.insertProduct(name);
-        return "post";
     }
 
     @PatchMapping("/{id}")
-    public String updateProduct(@PathVariable Long id) {
-        return "put " + id;
+    public void updateProduct(@PathVariable Long id, @RequestParam String name) {
+        this.productService.updateProduct(id, name);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        return "delete " + id;
+    public void deleteProduct(@PathVariable Long id) {
+        this.productService.deleteProduct(id);
     }
 }
