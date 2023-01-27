@@ -18,4 +18,20 @@ public class ProductImage {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Product product;
+
+    protected ProductImage() {}
+
+    public ProductImage(String path, String type, Product product) {
+        this.path = path;
+        this.type = ProductImageType.find(type);
+        this.product = product;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public ProductImageType getType() {
+        return type;
+    }
 }
