@@ -2,31 +2,40 @@ package connectly.assignment.product;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    @GetMapping("/{productId}")
-    public String getProduct(@PathVariable Long productId) {
-        return "get";
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping("/{id}")
+    public Product getProduct(@PathVariable Long id) {
+        return this.productService.find(id);
     }
 
     @GetMapping()
-    public String getAllProduct() {
-        return "get";
+    public List<Product> getAllProduct() {
+        return this.productService.findAll();
     }
 
-    @PostMapping
-    public String insertProduct() {
+    @PostMapping("/${name}")
+    public String insertProduct(@PathVariable String name) {
+        this.productService.insertProduct(name);
         return "post";
     }
 
-    @PatchMapping("/{productId}")
-    public String updateProduct(@PathVariable Long productId) {
-        return "put " + productId;
+    @PatchMapping("/{id}")
+    public String updateProduct(@PathVariable Long id) {
+        return "put " + id;
     }
 
-    @DeleteMapping("/{productId}")
-    public String deleteProduct(@PathVariable Long productId) {
-        return "delete " + productId;
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        return "delete " + id;
     }
 }
