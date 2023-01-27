@@ -1,6 +1,7 @@
 package connectly.assignment.product;
 
 import connectly.assignment.product.domain.Product;
+import connectly.assignment.product.dto.ProductRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,10 +22,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void insertProduct(String name) {
-        Product product = new Product();
-        product.setName(name);
-        productRepository.save(product);
+    public void insertProduct(ProductRequest request) {
+        productRepository.save(request.toEntity());
     }
 
     public void updateProduct(Long id,String name) {

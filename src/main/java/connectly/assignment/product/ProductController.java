@@ -1,6 +1,7 @@
 package connectly.assignment.product;
 
 import connectly.assignment.product.domain.Product;
+import connectly.assignment.product.dto.ProductRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class ProductController {
     }
 
     @PostMapping()
-    public void insertProduct(@RequestParam String name) {
-        this.productService.insertProduct(name);
+    public void insertProduct(@RequestBody ProductRequest request) {
+        this.productService.insertProduct(request);
     }
 
     @PatchMapping("/{id}")
