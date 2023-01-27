@@ -1,4 +1,4 @@
-package connectly.assignment.product;
+package connectly.assignment.product.domain;
 
 public enum ProductStatus {
     NEW, NORMAL

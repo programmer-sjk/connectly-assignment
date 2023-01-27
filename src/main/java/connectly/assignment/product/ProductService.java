@@ -1,5 +1,6 @@
 package connectly.assignment.product;
 
+import connectly.assignment.product.domain.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

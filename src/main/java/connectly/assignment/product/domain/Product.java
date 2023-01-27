@@ -1,4 +1,4 @@
-package connectly.assignment.product;
+package connectly.assignment.product.domain;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Comment;
