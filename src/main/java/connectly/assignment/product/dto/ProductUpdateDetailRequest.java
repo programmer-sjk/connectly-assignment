@@ -6,6 +6,10 @@ public class ProductUpdateDetailRequest {
     @NotBlank
     private String detail;
 
+    public ProductUpdateDetailRequest(String detail) {
+        this.detail = detail;
+    }
+
     public String getDetail() {
         return detail;
     }

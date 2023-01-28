@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRequest {
@@ -27,6 +28,20 @@ public class ProductRequest {
     private boolean display;
     private String detail;
     private List<ProductImageRequest> productImages;
+
+    public ProductRequest(Builder builder) {
+        this.name = builder.name;
+        this.brand = builder.brand;
+        this.originPrice = builder.originPrice;
+        this.discountRate = builder.discountRate;
+        this.serial = builder.serial;
+        this.productStatus = builder.productStatus;
+        this.madeIn = builder.madeIn;
+        this.shippingBy = builder.shippingBy;
+        this.display = builder.display;
+        this.detail = builder.detail;
+        this.productImages = builder.productImages;
+    }
 
     public Product toEntity() {
         return new Product.Builder()
@@ -86,5 +101,78 @@ public class ProductRequest {
 
     public List<ProductImageRequest> getProductImages() {
         return productImages;
+    }
+
+    public static class Builder {
+        private String name;
+        private String brand;
+        private int originPrice;
+        private int discountRate;
+        private String serial;
+        private String productStatus;
+        private String madeIn;
+        private String shippingBy;
+        private boolean display;
+        private String detail;
+        private List<ProductImageRequest> productImages = new ArrayList<>();
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder brand(String brand) {
+            this.brand = brand;
+            return this;
+        }
+
+        public Builder originPrice(int originPrice) {
+            this.originPrice = originPrice;
+            return this;
+        }
+
+        public Builder discountRate(int discountRate) {
+            this.discountRate = discountRate;
+            return this;
+        }
+
+        public Builder serial(String serial) {
+            this.serial = serial;
+            return this;
+        }
+
+        public Builder productStatus(String productStatus) {
+            this.productStatus = productStatus;
+            return this;
+        }
+
+        public Builder madeIn(String madeIn) {
+            this.madeIn = madeIn;
+            return this;
+        }
+
+        public Builder shippingBy(String shippingBy) {
+            this.shippingBy = shippingBy;
+            return this;
+        }
+
+        public Builder display(boolean display) {
+            this.display = display;
+            return this;
+        }
+
+        public Builder detail(String detail) {
+            this.detail = detail;
+            return this;
+        }
+
+        public Builder productImages(List<ProductImageRequest> productImages) {
+            this.productImages = productImages;
+            return this;
+        }
+
+        public ProductRequest build() {
+            return new ProductRequest(this);
+        }
     }
 }
