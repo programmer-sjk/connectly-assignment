@@ -157,6 +157,10 @@ public class Product extends BaseEntity {
         this.display = product.display;
     }
 
+    public void updateDetail(String detail) {
+        this.detail = detail;
+    }
+
     public static class Builder {
         private String name;
         private String brand;

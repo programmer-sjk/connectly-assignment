@@ -2,6 +2,7 @@ package connectly.assignment.product;
 
 import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductResponse;
+import connectly.assignment.product.dto.ProductUpdateDetailRequest;
 import connectly.assignment.product.dto.ProductUpdateRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,11 @@ public class ProductController {
     @PatchMapping("/{id}")
     public void updateProduct(@PathVariable Long id, @RequestBody ProductUpdateRequest request) {
         this.productService.updateProduct(id, request);
+    }
+
+    @PatchMapping("/{id}/detail")
+    public void updateDetailProduct(@PathVariable Long id, @RequestBody ProductUpdateDetailRequest request) {
+        this.productService.updateDetailProduct(id, request);
     }
 
     @DeleteMapping("/{id}")

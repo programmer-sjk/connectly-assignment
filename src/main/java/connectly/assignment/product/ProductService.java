@@ -3,6 +3,7 @@ package connectly.assignment.product;
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductResponse;
+import connectly.assignment.product.dto.ProductUpdateDetailRequest;
 import connectly.assignment.product.dto.ProductUpdateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,12 @@ public class ProductService {
     public void updateProduct(Long id, ProductUpdateRequest request) {
         Product product = this.findById(id);
         product.update(request.toEntity());
+    }
+
+    @Transactional
+    public void updateDetailProduct(Long id, ProductUpdateDetailRequest request) {
+        Product product = this.findById(id);
+        product.updateDetail(request.getDetail());
     }
 
     @Transactional
