@@ -3,11 +3,14 @@ package connectly.assignment.product;
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductResponse;
+import connectly.assignment.product.dto.ProductUpdateRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional(readOnly = true)
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -29,16 +32,18 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void insertProduct(ProductRequest request) {
         productRepository.save(request.toEntity());
     }
 
-    public void updateProduct(Long id,String name) {
+    @Transactional
+    public void updateProduct(Long id, ProductUpdateRequest request) {
         Product product = this.findById(id);
-        product.setName(name);
-        productRepository.save(product);
+        product.update(request.toEntity());
     }
 
+    @Transactional
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }

@@ -2,6 +2,7 @@ package connectly.assignment.product.domain;
 
 import connectly.assignment.common.BaseEntity;
 import connectly.assignment.product.dto.ProductImageRequest;
+import connectly.assignment.product.dto.ProductUpdateRequest;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -78,10 +79,11 @@ public class Product extends BaseEntity {
         this.shippingBy = builder.shippingBy;
         this.display = builder.display;
         this.detail = builder.detail;
-        this.productImages = builder.productImages
-                .stream()
-                .map(request -> new ProductImage(request.getPath(), request.getType(), this))
-                .collect(Collectors.toList());
+        // Todo 수정 시에 id 기준으로 뺴고 추가하고 유지가 필요해서 추후 개발.
+//        this.productImages = builder.productImages
+//                .stream()
+//                .map(request -> new ProductImage(request.getPath(), request.getType(), this))
+//                .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -144,8 +146,15 @@ public class Product extends BaseEntity {
         return updatedAt;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void update(Product product) {
+        this.name = product.name;
+        this.brand = product.brand;
+        this.originPrice = product.originPrice;
+        this.discountRate = product.discountRate;
+        this.productStatus = product.productStatus;
+        this.madeIn = product.madeIn;
+        this.shippingBy = product.shippingBy;
+        this.display = product.display;
     }
 
     public static class Builder {
