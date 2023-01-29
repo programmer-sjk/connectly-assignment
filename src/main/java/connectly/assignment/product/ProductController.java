@@ -6,7 +6,6 @@ import connectly.assignment.product.dto.ProductResponse;
 import connectly.assignment.product.dto.ProductUpdateDetailRequest;
 import connectly.assignment.product.dto.ProductUpdateRequest;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,44 +20,44 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseMessage> getProduct(@PathVariable Long id) {
+    public ResponseMessage<ProductResponse> getProduct(@PathVariable Long id) {
         ProductResponse response = this.productService.find(id);
-        return ResponseEntity.ok(new ResponseMessage<>(response));
+        return new ResponseMessage<>(response);
     }
 
     @GetMapping()
-    public ResponseEntity<ResponseMessage> getAllProduct() {
+    public ResponseMessage<List<ProductResponse>> getAllProduct() {
         List<ProductResponse> responses = this.productService.findAll();
-        return ResponseEntity.ok(new ResponseMessage(responses));
+        return new ResponseMessage<>(responses);
     }
 
     @PostMapping()
-    public ResponseEntity<ResponseMessage> insertProduct(@RequestBody @Valid ProductRequest request) {
+    public ResponseMessage<String> insertProduct(@RequestBody @Valid ProductRequest request) {
         this.productService.insertProduct(request);
-        return ResponseEntity.ok(ResponseMessage.OK());
+        return ResponseMessage.ok();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ResponseMessage> updateProduct(
+    public ResponseMessage<String> updateProduct(
             @PathVariable Long id,
             @RequestBody ProductUpdateRequest request
     ) {
         this.productService.updateProduct(id, request);
-        return ResponseEntity.ok(ResponseMessage.OK());
+        return ResponseMessage.ok();
     }
 
     @PatchMapping("/{id}/detail")
-    public ResponseEntity<ResponseMessage> updateDetailProduct(
+    public ResponseMessage<String> updateDetailProduct(
             @PathVariable Long id,
             @RequestBody ProductUpdateDetailRequest request
     ) {
         this.productService.updateDetailProduct(id, request);
-        return ResponseEntity.ok(ResponseMessage.OK());
+        return ResponseMessage.ok();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseMessage> deleteProduct(@PathVariable Long id) {
+    public ResponseMessage<String> deleteProduct(@PathVariable Long id) {
         this.productService.deleteProduct(id);
-        return ResponseEntity.ok(ResponseMessage.OK());
+        return ResponseMessage.ok();
     }
 }
