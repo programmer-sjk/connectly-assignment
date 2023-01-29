@@ -28,6 +28,8 @@ public class ProductUpdateRequest {
     private boolean display;
     private List<ProductImageRequest> productImages;
 
+    protected ProductUpdateRequest() {}
+
     public ProductUpdateRequest(Builder builder) {
         this.name = builder.name;
         this.brand = builder.brand;

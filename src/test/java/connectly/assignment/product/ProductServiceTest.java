@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class ProductServiceTest {
@@ -41,7 +40,7 @@ class ProductServiceTest {
 
         // then
         assertThat(actual.getId()).isEqualTo(result.getId());
-        assertEquals(actual.getName(), result.getName());
+        assertThat(actual.getName()).isEqualTo(result.getName());
     }
 
     @Test

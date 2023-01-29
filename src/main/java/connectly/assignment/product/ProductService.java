@@ -46,6 +46,7 @@ public class ProductService {
 
     @Transactional
     public void updateDetailProduct(Long id, ProductUpdateDetailRequest request) {
+        System.out.println(request.getDetail());
         Product product = this.findById(id);
         product.updateDetail(request.getDetail());
     }

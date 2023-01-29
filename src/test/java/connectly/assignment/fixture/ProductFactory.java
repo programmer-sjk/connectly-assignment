@@ -2,6 +2,7 @@ package connectly.assignment.fixture;
 
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.ProductRequest;
+import connectly.assignment.product.dto.ProductUpdateDetailRequest;
 import connectly.assignment.product.dto.ProductUpdateRequest;
 
 public class ProductFactory {
@@ -48,5 +49,9 @@ public class ProductFactory {
                 .shippingBy("CHINA")
                 .display(true)
                 .build();
+    }
+
+    public static ProductUpdateDetailRequest createUpdateDetailRequest(String detail) {
+        return new ProductUpdateDetailRequest(detail);
     }
 }

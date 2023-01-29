@@ -38,6 +38,8 @@ public class ProductResponse {
                 .collect(Collectors.toList());
     }
 
+    protected ProductResponse() {}
+
     public Long getId() {
         return id;
     }

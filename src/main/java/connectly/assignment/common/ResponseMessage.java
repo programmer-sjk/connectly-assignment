@@ -7,8 +7,8 @@ public class ResponseMessage<T> {
     private String message = "";
     private T data;
 
-    public static ResponseMessage OK() {
-        return new ResponseMessage("");
+    public static ResponseMessage<String> ok() {
+        return new ResponseMessage<>("");
     }
 
     public ResponseMessage(T data) {

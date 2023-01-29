@@ -29,6 +29,8 @@ public class ProductRequest {
     private String detail;
     private List<ProductImageRequest> productImages;
 
+    protected ProductRequest() {}
+
     public ProductRequest(Builder builder) {
         this.name = builder.name;
         this.brand = builder.brand;
