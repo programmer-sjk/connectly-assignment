@@ -2,10 +2,7 @@ package connectly.assignment.product;
 
 import connectly.assignment.fixture.ProductFactory;
 import connectly.assignment.product.domain.Product;
-import connectly.assignment.product.dto.ProductRequest;
-import connectly.assignment.product.dto.ProductResponse;
-import connectly.assignment.product.dto.ProductUpdateDetailRequest;
-import connectly.assignment.product.dto.ProductUpdateRequest;
+import connectly.assignment.product.dto.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 class ProductServiceTest {
@@ -44,6 +42,15 @@ class ProductServiceTest {
     }
 
     @Test
+    @DisplayName("특정 상품이 존재하지 않을 경우 예외가 발생한다.")
+    void findException() {
+        // when & then
+        assertThatThrownBy(() -> productService.find(999L))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("존재하지 않는 상품입니다");
+    }
+
+    @Test
     @DisplayName("전체 상품을 조회할 수 있다.")
     void findAll() {
         // given
@@ -51,7 +58,7 @@ class ProductServiceTest {
         Product productB = productRepository.save(ProductFactory.create("구찌 가방 B"));
 
         // when
-        List<ProductResponse> results = productService.findAll();
+        List<ProductAllResponse> results = productService.findAll();
 
         // then
         assertThat(results).hasSize(2);
@@ -89,6 +96,18 @@ class ProductServiceTest {
     }
 
     @Test
+    @DisplayName("상품 수정 시, 상품이 존재하지 않을 경우 예외가 발생한다.")
+    void updateException() {
+        // given
+        ProductUpdateRequest request = ProductFactory.createUpdateRequest("구찌 가방 B");
+
+        // when & then
+        assertThatThrownBy(() -> productService.updateProduct(999L, request))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("존재하지 않는 상품입니다");
+    }
+
+    @Test
     @DisplayName("상품 상세정보를 수정할 수 있다.")
     void updateDetail() {
         // given
@@ -101,6 +120,18 @@ class ProductServiceTest {
         // then
         Product result = productRepository.findAll().get(0);
         assertThat(result.getDetail()).isEqualTo("이 제품은 품절되었습니다.");
+    }
+
+    @Test
+    @DisplayName("상품 상세정보 수정시, 상품이 존재하지 않을 경우 예외가 발생한다.")
+    void updateDetailException() {
+        // given
+        ProductUpdateDetailRequest request = new ProductUpdateDetailRequest("이 제품은 품절되었습니다.");
+
+        // when & then
+        assertThatThrownBy(() -> productService.updateDetailProduct(999L, request))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("존재하지 않는 상품입니다");
     }
 
     @Test

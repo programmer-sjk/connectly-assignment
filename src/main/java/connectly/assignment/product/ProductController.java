@@ -1,10 +1,7 @@
 package connectly.assignment.product;
 
 import connectly.assignment.common.ResponseMessage;
-import connectly.assignment.product.dto.ProductRequest;
-import connectly.assignment.product.dto.ProductResponse;
-import connectly.assignment.product.dto.ProductUpdateDetailRequest;
-import connectly.assignment.product.dto.ProductUpdateRequest;
+import connectly.assignment.product.dto.*;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +23,8 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseMessage<List<ProductResponse>> getAllProduct() {
-        List<ProductResponse> responses = this.productService.findAll();
+    public ResponseMessage<List<ProductAllResponse>> getAllProduct() {
+        List<ProductAllResponse> responses = this.productService.findAll();
         return new ResponseMessage<>(responses);
     }
 

@@ -1,10 +1,7 @@
 package connectly.assignment.product;
 
 import connectly.assignment.product.domain.Product;
-import connectly.assignment.product.dto.ProductRequest;
-import connectly.assignment.product.dto.ProductResponse;
-import connectly.assignment.product.dto.ProductUpdateDetailRequest;
-import connectly.assignment.product.dto.ProductUpdateRequest;
+import connectly.assignment.product.dto.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,15 +18,13 @@ public class ProductService {
     }
 
     public ProductResponse find(Long id) {
-        ProductResponse productResponse = new ProductResponse(this.findById(id));
-        System.out.println(productResponse.getId());
-        return productResponse;
+        return new ProductResponse(this.findById(id));
     }
 
-    public List<ProductResponse> findAll() {
+    public List<ProductAllResponse> findAll() {
         return productRepository.findAll()
                 .stream()
-                .map(ProductResponse::new)
+                .map(ProductAllResponse::new)
                 .collect(Collectors.toList());
     }
 
@@ -46,7 +41,6 @@ public class ProductService {
 
     @Transactional
     public void updateDetailProduct(Long id, ProductUpdateDetailRequest request) {
-        System.out.println(request.getDetail());
         Product product = this.findById(id);
         product.updateDetail(request.getDetail());
     }
@@ -58,6 +52,6 @@ public class ProductService {
 
     private Product findById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다, productId = " + id));
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다"));
     }
 }
