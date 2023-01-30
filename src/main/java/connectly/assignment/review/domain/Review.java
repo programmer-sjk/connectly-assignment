@@ -24,6 +24,14 @@ public class Review extends BaseEntity {
     @Column(name = "createdBy")
     private User user;
 
+    protected Review() {}
+
+    public Review(String content, BigDecimal star, User user) {
+        this.content = content;
+        this.star = star;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
