@@ -15,6 +15,13 @@ public class ReviewUpdateRequest {
     @Min(0) @Max(5)
     private BigDecimal star;
 
+    protected ReviewUpdateRequest() {}
+
+    public ReviewUpdateRequest(String content, BigDecimal star) {
+        this.content = content;
+        this.star = star;
+    }
+
     public String getContent() {
         return content;
     }

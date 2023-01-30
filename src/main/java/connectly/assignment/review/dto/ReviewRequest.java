@@ -14,9 +14,17 @@ public class ReviewRequest {
     private BigDecimal star;
     @NotNull
     private Long userId;
-
     @NotNull
     private Long productId;
+
+    protected ReviewRequest() {}
+
+    public ReviewRequest(String content, BigDecimal star, Long userId, Long productId) {
+        this.content = content;
+        this.star = star;
+        this.userId = userId;
+        this.productId = productId;
+    }
 
     public Review toEntity(User user, Product product) {
         return new Review(content, star, user, product);
