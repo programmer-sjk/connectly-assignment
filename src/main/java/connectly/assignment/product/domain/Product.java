@@ -79,11 +79,30 @@ public class Product extends BaseEntity {
         this.shippingBy = builder.shippingBy;
         this.display = builder.display;
         this.detail = builder.detail;
-        // Todo 수정 시에 id 기준으로 뺴고 추가하고 유지가 필요해서 추후 개발.
-//        this.productImages = builder.productImages
-//                .stream()
-//                .map(request -> new ProductImage(request.getPath(), request.getType(), this))
-//                .collect(Collectors.toList());
+
+        for (ProductImage image : builder.productImages) {
+            addProductImage(image);
+        }
+    }
+
+    public void update(Product product) {
+        this.name = product.name;
+        this.brand = product.brand;
+        this.originPrice = product.originPrice;
+        this.discountRate = product.discountRate;
+        this.productStatus = product.productStatus;
+        this.madeIn = product.madeIn;
+        this.shippingBy = product.shippingBy;
+        this.display = product.display;
+    }
+
+    public void updateDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public void addProductImage(ProductImage productImage) {
+        this.productImages.add(productImage);
+        productImage.setProduct(this);
     }
 
     public Long getId() {
@@ -146,21 +165,6 @@ public class Product extends BaseEntity {
         return updatedAt;
     }
 
-    public void update(Product product) {
-        this.name = product.name;
-        this.brand = product.brand;
-        this.originPrice = product.originPrice;
-        this.discountRate = product.discountRate;
-        this.productStatus = product.productStatus;
-        this.madeIn = product.madeIn;
-        this.shippingBy = product.shippingBy;
-        this.display = product.display;
-    }
-
-    public void updateDetail(String detail) {
-        this.detail = detail;
-    }
-
     public static class Builder {
         private String name;
         private String brand;
@@ -172,7 +176,7 @@ public class Product extends BaseEntity {
         private String shippingBy;
         private boolean display;
         private String detail;
-        private List<ProductImageRequest> productImages = new ArrayList<>();
+        private List<ProductImage> productImages = new ArrayList<>();
 
         public Builder name(String name) {
             this.name = name;
@@ -224,7 +228,7 @@ public class Product extends BaseEntity {
             return this;
         }
 
-        public Builder productImages(List<ProductImageRequest> productImages) {
+        public Builder productImages(List<ProductImage> productImages) {
             this.productImages = productImages;
             return this;
         }

@@ -1,12 +1,15 @@
 package connectly.assignment.product.dto;
 
 import connectly.assignment.product.domain.Product;
+import connectly.assignment.product.domain.ProductImage;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductRequest {
     @NotBlank
@@ -27,6 +30,7 @@ public class ProductRequest {
     private String shippingBy;
     private boolean display;
     private String detail;
+    @Valid
     private List<ProductImageRequest> productImages;
 
     protected ProductRequest() {}
@@ -46,6 +50,10 @@ public class ProductRequest {
     }
 
     public Product toEntity() {
+        List<ProductImage> images = productImages.stream()
+                .map(ProductImageRequest::toEntity)
+                .collect(Collectors.toList());
+
         return new Product.Builder()
                 .name(name)
                 .brand(brand)
@@ -57,7 +65,7 @@ public class ProductRequest {
                 .shippingBy(shippingBy)
                 .display(display)
                 .detail(detail)
-                .productImages(productImages)
+                .productImages(images)
                 .build();
     }
 
