@@ -7,6 +7,7 @@ import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductResponse;
 import connectly.assignment.product.dto.ProductUpdateDetailRequest;
 import connectly.assignment.product.dto.ProductUpdateRequest;
+import connectly.assignment.product.repository.ProductRepository;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

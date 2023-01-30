@@ -3,6 +3,8 @@ package connectly.assignment.product;
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.domain.ProductImage;
 import connectly.assignment.product.dto.*;
+import connectly.assignment.product.repository.ProductImageRepository;
+import connectly.assignment.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

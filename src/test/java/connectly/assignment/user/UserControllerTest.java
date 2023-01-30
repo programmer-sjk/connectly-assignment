@@ -2,10 +2,7 @@ package connectly.assignment.user;
 
 
 import connectly.assignment.AcceptanceTest;
-import connectly.assignment.fixture.ProductFactory;
 import connectly.assignment.fixture.UserFactory;
-import connectly.assignment.product.ProductRepository;
-import connectly.assignment.product.domain.Product;
 import connectly.assignment.user.domain.User;
 import connectly.assignment.user.dto.UserRequest;
 import io.restassured.RestAssured;

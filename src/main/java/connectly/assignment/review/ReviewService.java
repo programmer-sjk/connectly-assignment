@@ -1,15 +1,13 @@
 package connectly.assignment.review;
 
-import connectly.assignment.product.ProductRepository;
+import connectly.assignment.product.repository.ProductRepository;
 import connectly.assignment.product.domain.Product;
-import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.review.domain.Review;
 import connectly.assignment.review.dto.ReviewRequest;
 import connectly.assignment.review.dto.ReviewResponse;
 import connectly.assignment.review.dto.ReviewUpdateRequest;
 import connectly.assignment.user.UserRepository;
 import connectly.assignment.user.domain.User;
-import connectly.assignment.user.dto.UserRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package connectly.assignment.product;
+package connectly.assignment.product.repository;
 
 import connectly.assignment.product.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
