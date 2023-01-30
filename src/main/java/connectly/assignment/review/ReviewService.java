@@ -35,7 +35,7 @@ public class ReviewService {
         Product product = this.findProductById(productId);
         return reviewRepository.findAllByProductId(product.getId())
                 .stream()
-                .map(review -> new ReviewResponse(review.getId(), review.getContent(), review.getStar()))
+                .map(ReviewResponse::new)
                 .collect(Collectors.toList());
     }
 

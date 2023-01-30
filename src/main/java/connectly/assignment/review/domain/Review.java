@@ -33,12 +33,16 @@ public class Review extends BaseEntity {
         this.content = content;
         this.star = star;
         this.user = user;
-        this.product = product;
+        product.addReview(this);
     }
 
     public void update(String content, BigDecimal star) {
         this.content = content;
         this.star = star;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Long getId() {

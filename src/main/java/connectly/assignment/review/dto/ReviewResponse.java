@@ -1,5 +1,7 @@
 package connectly.assignment.review.dto;
 
+import connectly.assignment.review.domain.Review;
+
 import java.math.BigDecimal;
 
 public class ReviewResponse {
@@ -9,10 +11,10 @@ public class ReviewResponse {
 
     protected ReviewResponse() {}
 
-    public ReviewResponse(Long id, String content, BigDecimal star) {
-        this.id = id;
-        this.content = content;
-        this.star = star;
+    public ReviewResponse(Review review) {
+        this.id = review.getId();
+        this.content = review.getContent();
+        this.star = review.getStar();
     }
 
     public Long getId() {

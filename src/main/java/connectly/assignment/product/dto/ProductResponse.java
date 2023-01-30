@@ -1,6 +1,8 @@
 package connectly.assignment.product.dto;
 
 import connectly.assignment.product.domain.Product;
+import connectly.assignment.review.domain.Review;
+import connectly.assignment.review.dto.ReviewResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +21,7 @@ public class ProductResponse {
     private String shippingBy;
     private String detail;
     private List<ProductImageResponse> productImages;
+    private List<ReviewResponse> reviews;
 
     public ProductResponse(Product product) {
         this.id = product.getId();
@@ -35,6 +38,10 @@ public class ProductResponse {
         this.productImages = product.getProductImages()
                 .stream()
                 .map(ProductImageResponse::new)
+                .collect(Collectors.toList());
+        this.reviews = product.getReviews()
+                .stream()
+                .map(ReviewResponse::new)
                 .collect(Collectors.toList());
     }
 
@@ -86,5 +93,9 @@ public class ProductResponse {
 
     public List<ProductImageResponse> getProductImages() {
         return productImages;
+    }
+
+    public List<ReviewResponse> getReviews() {
+        return reviews;
     }
 }

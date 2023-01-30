@@ -1,6 +1,7 @@
 package connectly.assignment.product.domain;
 
 import connectly.assignment.common.BaseEntity;
+import connectly.assignment.review.domain.Review;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -64,6 +65,10 @@ public class Product extends BaseEntity {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> productImages = new ArrayList<>();
 
+    @Comment("상품에 해당하는 리뷰")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
     protected Product() {}
 
     public Product(Builder builder) {
@@ -100,6 +105,11 @@ public class Product extends BaseEntity {
     public void addProductImage(ProductImage productImage) {
         this.productImages.add(productImage);
         productImage.setProduct(this);
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+        review.setProduct(this);
     }
 
     public Long getId() {
@@ -160,6 +170,10 @@ public class Product extends BaseEntity {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
     }
 
     public static class Builder {
