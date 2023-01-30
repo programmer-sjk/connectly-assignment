@@ -52,6 +52,15 @@ public class ProductController {
         return ResponseMessage.ok();
     }
 
+    @PatchMapping("/{id}/images")
+    public ResponseMessage<String> updateProductImages(
+            @PathVariable Long id,
+            @RequestBody List<ProductImageUpdateRequest> requests
+    ) {
+        this.productService.updateProductImages(id, requests);
+        return ResponseMessage.ok();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseMessage<String> deleteProduct(@PathVariable Long id) {
         this.productService.deleteProduct(id);
