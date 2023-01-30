@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 public class ResponseMessage<T> {
     private int statusCode = HttpStatus.OK.value();
     private String message = "";
-    private T data;
+    protected T data;
 
     public static ResponseMessage<String> ok() {
         return new ResponseMessage<>("");

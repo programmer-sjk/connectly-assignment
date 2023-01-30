@@ -1,5 +1,6 @@
 package connectly.assignment.product;
 
+import connectly.assignment.common.PageResponse;
 import connectly.assignment.fixture.ProductFactory;
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.domain.ProductImage;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,13 +67,36 @@ class ProductServiceTest {
         Product productA = productRepository.save(ProductFactory.create("구찌 가방 A"));
         Product productB = productRepository.save(ProductFactory.create("구찌 가방 B"));
 
+
         // when
-        List<ProductAllResponse> results = productService.findAll();
+        PageResponse<List<ProductAllResponse>> responses = productService.findAll(PageRequest.of(0, 20));
 
         // then
+        List<ProductAllResponse> results = responses.getData();
         assertThat(results).hasSize(2);
         assertThat(results.get(0).getId()).isEqualTo(productA.getId());
         assertThat(results.get(1).getId()).isEqualTo(productB.getId());
+    }
+
+    @Test
+    @DisplayName("전체 상품 조회는 pagination 된다.")
+    void pagination() {
+        // given
+        int paginationCount = 10;
+        for (int i = 0; i < paginationCount + 1; i++) {
+            productRepository.save(ProductFactory.create("구찌 가방" + i));
+        }
+
+        // when
+        PageResponse<List<ProductAllResponse>> response = productService.findAll(PageRequest.of(0, 10));
+
+        // then
+        assertThat(response.getPaginationSize()).isEqualTo(paginationCount);
+        assertThat(response.getTotalElements()).isEqualTo(paginationCount + 1);
+        assertThat(response.getTotalPages()).isEqualTo(2);
+
+        List<ProductAllResponse> results = response.getData();
+        assertThat(results).hasSize(paginationCount);
     }
 
     @Test

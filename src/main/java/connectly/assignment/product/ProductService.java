@@ -1,10 +1,13 @@
 package connectly.assignment.product;
 
+import connectly.assignment.common.PageResponse;
 import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.domain.ProductImage;
 import connectly.assignment.product.dto.*;
 import connectly.assignment.product.repository.ProductImageRepository;
 import connectly.assignment.product.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +29,13 @@ public class ProductService {
         return new ProductResponse(this.findById(id));
     }
 
-    public List<ProductAllResponse> findAll() {
-        return productRepository.findAll()
-                .stream()
+    public PageResponse<List<ProductAllResponse>> findAll(Pageable pageable) {
+        Page<Product> products = productRepository.findAll(pageable);
+        List<ProductAllResponse> responses = products.stream()
                 .map(ProductAllResponse::new)
                 .collect(Collectors.toList());
+
+        return new PageResponse<>(products.getTotalPages(), products.getTotalElements(), products.getSize(), responses);
     }
 
     @Transactional
