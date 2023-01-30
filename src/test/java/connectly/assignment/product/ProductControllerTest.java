@@ -3,10 +3,9 @@ package connectly.assignment.product;
 import connectly.assignment.AcceptanceTest;
 import connectly.assignment.fixture.ProductFactory;
 import connectly.assignment.product.domain.Product;
-import connectly.assignment.product.dto.ProductRequest;
-import connectly.assignment.product.dto.ProductResponse;
-import connectly.assignment.product.dto.ProductUpdateDetailRequest;
-import connectly.assignment.product.dto.ProductUpdateRequest;
+import connectly.assignment.product.domain.ProductImage;
+import connectly.assignment.product.dto.*;
+import connectly.assignment.product.repository.ProductImageRepository;
 import connectly.assignment.product.repository.ProductRepository;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,6 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ProductControllerTest extends AcceptanceTest {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductImageRepository productImageRepository;
 
     @Test
     @DisplayName("특정 상품을 조회할 수 있다.")
@@ -91,6 +94,20 @@ class ProductControllerTest extends AcceptanceTest {
     }
 
     @Test
+    @DisplayName("상품 이미지를 수정할 수 있다.")
+    void updateImages() {
+        // given
+        Product product = productRepository.save(ProductFactory.create("루이비똥"));
+
+        // when
+        updateProductImages(product.getId(), ProductFactory.createImageUpdateRequest("s3 image path"));
+
+        // then
+        ProductImage productImage = productImageRepository.findAll().get(0);
+        assertThat(productImage.getPath()).isEqualTo("s3 image path");
+    }
+
+    @Test
     @DisplayName("상품을 삭제할 수 있다.")
     void delete() {
         // given
@@ -130,6 +147,16 @@ class ProductControllerTest extends AcceptanceTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
                 .when().patch("/products/" + id + "/detail")
+                .then().log().all()
+                .extract();
+    }
+
+    private void updateProductImages(Long id, ProductImageUpdateRequest request) {
+        RestAssured
+                .given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(Arrays.asList(request))
+                .when().patch("/products/" + id + "/images")
                 .then().log().all()
                 .extract();
     }

@@ -1,6 +1,7 @@
 package connectly.assignment.fixture;
 
 import connectly.assignment.product.domain.Product;
+import connectly.assignment.product.dto.ProductImageUpdateRequest;
 import connectly.assignment.product.dto.ProductRequest;
 import connectly.assignment.product.dto.ProductUpdateDetailRequest;
 import connectly.assignment.product.dto.ProductUpdateRequest;
@@ -53,5 +54,9 @@ public class ProductFactory {
 
     public static ProductUpdateDetailRequest createUpdateDetailRequest(String detail) {
         return new ProductUpdateDetailRequest(detail);
+    }
+
+    public static ProductImageUpdateRequest createImageUpdateRequest(String path) {
+        return new ProductImageUpdateRequest(path, "MAIN", 1);
     }
 }

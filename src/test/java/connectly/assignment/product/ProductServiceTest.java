@@ -2,7 +2,9 @@ package connectly.assignment.product;
 
 import connectly.assignment.fixture.ProductFactory;
 import connectly.assignment.product.domain.Product;
+import connectly.assignment.product.domain.ProductImage;
 import connectly.assignment.product.dto.*;
+import connectly.assignment.product.repository.ProductImageRepository;
 import connectly.assignment.product.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +25,9 @@ class ProductServiceTest {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductImageRepository productImageRepository;
 
     @BeforeEach
     void setUp() {
@@ -133,6 +139,21 @@ class ProductServiceTest {
         assertThatThrownBy(() -> productService.updateDetailProduct(999L, request))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("존재하지 않는 상품입니다");
+    }
+
+    @Test
+    @DisplayName("상품 이미지를 수정할 수 있다.")
+    void updateProductImages() {
+        // given
+        Product product = productRepository.save(ProductFactory.create("구찌 가방 A"));
+        ProductImageUpdateRequest request = ProductFactory.createImageUpdateRequest("https://s3.amazone/xxxx");
+
+        // when
+        productService.updateProductImages(product.getId(), Arrays.asList(request));
+
+        // then
+        ProductImage result = productImageRepository.findAll().get(0);
+        assertThat(result.getPath()).isEqualTo("https://s3.amazone/xxxx");
     }
 
     @Test

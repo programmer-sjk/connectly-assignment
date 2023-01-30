@@ -14,6 +14,13 @@ public class ProductImageUpdateRequest {
     @NotNull @Min(0)
     private int seq;
 
+    protected ProductImageUpdateRequest() {}
+
+    public ProductImageUpdateRequest(String path,  String type, int seq) {
+        this.path = path;
+        this.type = type;
+        this.seq = seq;
+    }
 
     public String getPath() {
         return path;
