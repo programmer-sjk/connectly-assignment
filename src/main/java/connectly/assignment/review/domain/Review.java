@@ -22,7 +22,6 @@ public class Review extends BaseEntity {
     private BigDecimal star = BigDecimal.valueOf(0.0);
 
     @ManyToOne
-    @Column(name = "createdBy")
     private User user;
 
     @ManyToOne
