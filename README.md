@@ -12,15 +12,33 @@
 - Review: 각 상품에 대한 Review 엔티티입니다.
 - User: Review 때문에 추가했습니다. 간단한 컬럼들로 엔티티를 구성했습니다
 
-## 기능 설명
+## API 기능 설명
+```
 - product API 
-  - 조회(상품 전체 조회, 특정 상품 조회)
+  - 조회
+    - GET /products   (전체 조회)
+    - GET /products/1 (특정 상품 조회)
   - 상품 추가
-  - 상품 수정 (상품 수정, 상품 이미지 수정, 상품 상세정보 수정)
+    - POST /products
+  - 상품 수정 
+    - PATCH /products/1        (상품 수정)
+    - PATCH /products/1/detail (상품 상세정보 수정)
+    - PATCH /products/1/images (상품 이미지 수정)
   - 상품 삭제
-- user API (사용자 추가, review가 추가되면서 넣은거라 간단하게 구성했습니다.)
-- review API (리뷰 추가, 수정, 삭제, 상품 id에 대한 리뷰 조회)
-  
+    - DELETE /products/1
+- user API
+  - POST /users (유저 등록)
+- review API 
+  - 조회
+    - GET /reviews?productId=1
+  - 추가
+    - POST /reviews
+  - 수정
+    - PATCH /reviews/1
+  - 삭제
+    - DELETE /reviews/1
+```
+
 ## 디렉토리 구조
 ```text
 src
