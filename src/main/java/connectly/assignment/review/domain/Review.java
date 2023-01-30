@@ -21,9 +21,11 @@ public class Review extends BaseEntity {
     @Column(precision = 2, scale = 1)
     private BigDecimal star = BigDecimal.valueOf(0.0);
 
+    @Comment("리뷰 작성자")
     @ManyToOne
     private User user;
 
+    @Comment("리뷰가 달린 상품")
     @ManyToOne
     private Product product;
 
