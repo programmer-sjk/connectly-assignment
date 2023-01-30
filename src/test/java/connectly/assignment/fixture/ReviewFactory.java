@@ -5,7 +5,6 @@ import connectly.assignment.review.domain.Review;
 import connectly.assignment.review.dto.ReviewRequest;
 import connectly.assignment.review.dto.ReviewUpdateRequest;
 import connectly.assignment.user.domain.User;
-import connectly.assignment.user.dto.UserRequest;
 
 import java.math.BigDecimal;
 

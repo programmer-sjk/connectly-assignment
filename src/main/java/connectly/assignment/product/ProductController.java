@@ -2,10 +2,8 @@ package connectly.assignment.product;
 
 import connectly.assignment.common.PageResponse;
 import connectly.assignment.common.ResponseMessage;
-import connectly.assignment.product.domain.Product;
 import connectly.assignment.product.dto.*;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 

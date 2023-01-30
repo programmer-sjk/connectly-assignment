@@ -1,13 +1,9 @@
 package connectly.assignment.user;
 
 import connectly.assignment.common.ResponseMessage;
-import connectly.assignment.product.ProductService;
-import connectly.assignment.product.dto.*;
 import connectly.assignment.user.dto.UserRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")

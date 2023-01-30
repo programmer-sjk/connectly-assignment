@@ -1,8 +1,6 @@
 package connectly.assignment.product.domain;
 
 import connectly.assignment.common.BaseEntity;
-import connectly.assignment.product.dto.ProductImageRequest;
-import connectly.assignment.product.dto.ProductUpdateRequest;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -11,7 +9,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 public class Product extends BaseEntity {

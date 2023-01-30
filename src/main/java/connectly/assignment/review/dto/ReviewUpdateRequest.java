@@ -1,11 +1,8 @@
 package connectly.assignment.review.dto;
 
-import connectly.assignment.review.domain.Review;
-import connectly.assignment.user.domain.User;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 

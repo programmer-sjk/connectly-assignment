@@ -1,8 +1,6 @@
 package connectly.assignment.review;
 
 import connectly.assignment.common.ResponseMessage;
-import connectly.assignment.product.ProductService;
-import connectly.assignment.product.dto.*;
 import connectly.assignment.review.dto.ReviewRequest;
 import connectly.assignment.review.dto.ReviewResponse;
 import connectly.assignment.review.dto.ReviewUpdateRequest;
