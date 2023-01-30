@@ -1,6 +1,7 @@
 package connectly.assignment.review.domain;
 
 import connectly.assignment.common.BaseEntity;
+import connectly.assignment.product.domain.Product;
 import connectly.assignment.user.domain.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Comment;
@@ -24,12 +25,21 @@ public class Review extends BaseEntity {
     @Column(name = "createdBy")
     private User user;
 
+    @ManyToOne
+    private Product product;
+
     protected Review() {}
 
-    public Review(String content, BigDecimal star, User user) {
+    public Review(String content, BigDecimal star, User user, Product product) {
         this.content = content;
         this.star = star;
         this.user = user;
+        this.product = product;
+    }
+
+    public void update(String content, BigDecimal star) {
+        this.content = content;
+        this.star = star;
     }
 
     public Long getId() {
