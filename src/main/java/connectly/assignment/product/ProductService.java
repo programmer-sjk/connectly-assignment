@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     public PageResponse<List<ProductAllResponse>> findAll(Pageable pageable) {
-        Page<Product> products = productRepository.findAll(pageable);
+        Page<Product> products = productRepository.findAllByDisplayTrue(pageable);
         List<ProductAllResponse> responses = products.stream()
                 .map(ProductAllResponse::new)
                 .collect(Collectors.toList());
@@ -73,7 +73,7 @@ public class ProductService {
     }
 
     private Product findById(Long id) {
-        return productRepository.findById(id)
+        return productRepository.findByIdAndDisplayTrue(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다"));
     }
 }
