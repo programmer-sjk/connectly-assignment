@@ -51,6 +51,18 @@ class ProductServiceTest {
     }
 
     @Test
+    @DisplayName("특정 상품을 조회시, display 값이 false라면 예외가 발생한다.")
+    void findDisplayIsFalse() {
+        // given
+        Product notDisplayProduct = productRepository.save(ProductFactory.createNotDisplayProduct("구찌 가방 A"));
+
+        // when & then
+        assertThatThrownBy(() -> productService.find(notDisplayProduct.getId()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("존재하지 않는 상품입니다");
+    }
+
+    @Test
     @DisplayName("특정 상품이 존재하지 않을 경우 예외가 발생한다.")
     void findException() {
         // when & then
@@ -75,6 +87,23 @@ class ProductServiceTest {
         assertThat(results).hasSize(2);
         assertThat(results.get(0).getId()).isEqualTo(productA.getId());
         assertThat(results.get(1).getId()).isEqualTo(productB.getId());
+    }
+
+    @Test
+    @DisplayName("전체 상품 조회시, display 값이 false라면 조회되지 않는다.")
+    void findAllWithDisplayIsFalse() {
+        // given
+        Product product = productRepository.save(ProductFactory.create("구찌 가방 A"));
+        productRepository.save(ProductFactory.createNotDisplayProduct("구찌 가방 B"));
+
+
+        // when
+        PageResponse<List<ProductAllResponse>> responses = productService.findAll(PageRequest.of(0, 20));
+
+        // then
+        List<ProductAllResponse> results = responses.getData();
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getId()).isEqualTo(product.getId());
     }
 
     @Test
