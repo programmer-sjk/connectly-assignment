@@ -4,7 +4,7 @@
 - Spring Boot + JPA 기반의 간단한 CRUD 숙달
 
 ## 요구 사항
-- 자유롭게 언어와 프레임워크, 데이터베이스 등을 사용해서 상품 리스트 조회 API를 개발을 전제
+- 자유롭게 언어와 프레임워크, 데이터베이스 등을 사용해서 상품 리스트 조회 API 개발을 전제
 - 상품(Produt)에 대한 조회/등록/수정/삭제가 가능해야 한다.
 - 상품을 등록할 유저가 회원가입 할 수 있어야 한다.
 - 상품에 대한 Review를 조회/추가/수정/삭제가 가능해야 한다.
@@ -56,6 +56,8 @@ src
     |  |--- BaseEntity.js (엔티티에 공통으로 적용되는 컬럼)
     |  |--- PageResponse.js (페이지네이션 응답 파일)
     |  |--- ResponseMessage.js (API 응답에 사용되는 공통 포맷)
+    |--- exception
+    |  |---GlobalExceptionHandler.js (입력값, 실행 에러, 존재하지 않는 API 접근 등 전역 예외 처리)
     |--- product
     |  |--- domain 패키지 (엔티티 + enum)
     |  |--- dto 패키지 (request, response dto 구성)
