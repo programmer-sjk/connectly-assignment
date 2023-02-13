@@ -11,6 +11,10 @@ public class ResponseMessage<T> {
         return new ResponseMessage<>("");
     }
 
+    public static ResponseMessage<String> badRequest(String message) {
+        return new ResponseMessage<>(HttpStatus.BAD_REQUEST.value(), message, "");
+    }
+
     public ResponseMessage(T data) {
         this.data = data;
     }
