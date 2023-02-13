@@ -15,6 +15,10 @@ public class ResponseMessage<T> {
         return new ResponseMessage<>(HttpStatus.BAD_REQUEST.value(), message, "");
     }
 
+    public static ResponseMessage<String> notFound(String message) {
+        return new ResponseMessage<>(HttpStatus.NOT_FOUND.value(), message, "");
+    }
+
     public ResponseMessage(T data) {
         this.data = data;
     }
