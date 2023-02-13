@@ -1,5 +1,8 @@
 # 상품 조회 API 
 
+## 개발 목적
+- Spring Boot + JPA 기반의 간단한 CRUD 숙달
+
 ## 환경 구성
 - 코드 다운로드 후 별도의 DB나 Docker 구동 없이 실행되도록 h2 in-memory DB를 사용했습니다.
 - Spring Boot (3.0.2) + Java 17
