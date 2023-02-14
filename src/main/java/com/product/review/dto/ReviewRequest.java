@@ -17,7 +17,7 @@ public class ReviewRequest {
     @NotNull
     private Long productId;
 
-    protected ReviewRequest() {}
+    private ReviewRequest() {}
 
     public ReviewRequest(String content, BigDecimal star, Long userId, Long productId) {
         this.content = content;

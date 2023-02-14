@@ -44,7 +44,7 @@ public class ProductResponse {
                 .collect(Collectors.toList());
     }
 
-    protected ProductResponse() {}
+    private ProductResponse() {}
 
     public Long getId() {
         return id;

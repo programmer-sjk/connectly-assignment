@@ -14,7 +14,7 @@ public class ProductImageUpdateRequest {
     @NotNull @Min(0)
     private int seq;
 
-    protected ProductImageUpdateRequest() {}
+    private ProductImageUpdateRequest() {}
 
     public ProductImageUpdateRequest(String path,  String type, int seq) {
         this.path = path;

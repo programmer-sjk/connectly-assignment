@@ -33,7 +33,7 @@ public class ProductRequest {
     @Valid
     private List<ProductImageRequest> productImages;
 
-    protected ProductRequest() {}
+    private ProductRequest() {}
 
     public ProductRequest(Builder builder) {
         this.name = builder.name;

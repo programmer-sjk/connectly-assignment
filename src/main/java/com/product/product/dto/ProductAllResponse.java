@@ -25,7 +25,7 @@ public class ProductAllResponse {
                 .collect(Collectors.toList());
     }
 
-    protected ProductAllResponse() {}
+    private ProductAllResponse() {}
 
     public Long getId() {
         return id;

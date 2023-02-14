@@ -9,7 +9,7 @@ public class ReviewResponse {
     private String content;
     private BigDecimal star;
 
-    protected ReviewResponse() {}
+    private ReviewResponse() {}
 
     public ReviewResponse(Review review) {
         this.id = review.getId();
